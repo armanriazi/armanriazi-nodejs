@@ -1,0 +1,18 @@
+{
+"name": "linuxfoundation_sample_2",
+"version": "1.0.0",
+"description": "",
+"main": "index.js",    
+"scripts": {
+    "static": "serve -p 5050 static",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^4.25.2",
+    "fastify-cli": "^6.0.1",
+    "serve": "^14.2.1"
+  }
+}

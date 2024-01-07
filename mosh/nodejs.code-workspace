@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+
+		"eslint.nodePath": ".",
+		"[html]": {
+			"editor.codeActionsOnSave": {
+			  "source.fixAll.eslint": false
+			}
+		},
+		"eslint.workingDirectories": [ "./client", "./server" ],
+		"editor.codeActionsOnSave": {
+			"source.fixAll": true,
+			"source.fixAll.eslint": true //never
+		}
+	}
+}
