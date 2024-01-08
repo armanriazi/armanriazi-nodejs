@@ -35,7 +35,7 @@ Let’s see what’s happening in the preceding pseudocode:
 We can now introduce the reactor pattern, which is a specialization of the algorithms presented in the previous sections. The main idea behind the reactor pattern is to have a handler associated with each I/O operation. A handler in Node.js is represented by a callback (or cb for short) function.
 Each operating system has its own interface for the event demultiplexer: epoll on Linux, kqueue on macOS, and the I/O completion port (IOCP) API on Windows. 
 
-[reactor](~/nodejs/reactor.jpg)
+![Reactor](~/nodejs/reactor.jpg)
 
 Here’s what happens in an application using the reactor pattern:
 
@@ -71,4 +71,4 @@ Other than abstracting the underlying system calls, libuv also implements the re
 
 • A core JavaScript library that implements the high-level Node.js API.
 
-[Core Components](~/nodejs/nodejs.jpg)
+![Core Components](~/nodejs/nodejs.jpg)
