@@ -37,33 +37,11 @@ const category = document.querySelector("#category");
 const add = document.querySelector("#add");
 
 let socket = null;
-// Realtime orders handler using WebSocket
-/*Classic(One directional real-time, server to client):
-
-const realtimeOrders = (category) => {
-  if (socket) socket.close();
-  socket = new WebSocket(`${WS_API}/orders/${category}`);
-  socket.addEventListener("message", ({ data }) => {
-    try {
-      const { id, total } = JSON.parse(data);
-      const item = document.querySelector(`[data-id="${id}"]`);
-      if (item === null) return;
-      const span =
-        item.querySelector('[slot="orders"]')
-         || document.createElement("span");
-      span.slot = "orders";
-      span.textContent = total;
-      item.appendChild(span);
-    } catch (err) {
-      console.error(err);
-    }
-  });
-};*/
-
 
 // Realtime orders via Websocket bio-directional
+
 const realtimeOrders = (category) => {
-  if (socket) socket.close();
+  
   if (socket === null) {
     socket = new WebSocket(`${WS_API}/orders/${category}`);
   } else {
@@ -123,3 +101,4 @@ customElements.define(
     }
   }
 ); 
+

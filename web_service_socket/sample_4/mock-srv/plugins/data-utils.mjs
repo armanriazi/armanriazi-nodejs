@@ -1,7 +1,7 @@
 "use strict";
-import fastify from "fastify";
 import fp from "fastify-plugin";
-import { PassThrough } from "node:stream"; 
+import { PassThrough } from "node:stream";
+
 
 
 const orders = {
@@ -15,10 +15,6 @@ const catToPrefix = {
   confectionery: "B",
 };
 
-
-/*
-Node.js streams represent continuous data and have quite a vast API. There are readable streams, writable streams, and hybrid streams that are both readable and writable (duplex, transform, and passthrough streams). One very useful characteristic of readable streams is they are async iterables, which means we can use the same for await of loops 
-*/
  // Create a stream of orders
  const orderStream = new PassThrough({ objectMode: true });
 
@@ -28,7 +24,6 @@ Node.js streams represent continuous data and have quite a vast API. There are r
      yield JSON.stringify({ id, total });
    }
  } 
- /// we check that the incoming amount is an integer using Number.isInteger. This is useful in also weeding out NaN, Infinity and -Infinity which would all have a type of number. It does not enforce positive numbers, so it's possible to reduce the order count as well with this implementation. If the amount value is not an integer an error is thrown with a 400 status code
  // Add order to stream and update total
  function addOrder(id, amount) {
   if (orders.hasOwnProperty(id) === false) {
@@ -46,6 +41,7 @@ Node.js streams represent continuous data and have quite a vast API. There are r
   console.log("Adding order: %o", { id, total });
   orderStream.write({ id, total });
 } 
+
 //This time we will add a synchronous generator function:
 function* currentOrders(category) {
   const idPrefix = catToPrefix[category];
@@ -55,8 +51,6 @@ function* currentOrders(category) {
     yield JSON.stringify({ id, ...orders[id] });
   }
 }
-
-
 
 const calculateID = (idPrefix, data) => {
   const sorted = [...new Set(data.map(({ id }) => id))];
@@ -72,6 +66,6 @@ export default fp(async function (fastify, opts) {
     const idPrefix = catToPrefix[category];
     const id = calculateID(idPrefix, data);
     data.push({ id, ...request.body });
-    return data
+    return data;
   });
-});
+}); 

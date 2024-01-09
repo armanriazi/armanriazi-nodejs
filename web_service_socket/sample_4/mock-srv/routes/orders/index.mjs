@@ -3,15 +3,15 @@
 export default async function (fastify, opts) {
   function monitorMessages(socket) {
     socket.on("message", (data) => {
+      const message = JSON.parse(data);
       try {
-        const { cmd, payload } = JSON.parse(data);
-        if (cmd === "update-category") {
-          sendCurrentOrders(payload.category, socket);
+        if (message.cmd === "update-category") {
+          return sendCurrentOrders(message.payload.category, socket);
         }
       } catch (err) {
         fastify.log.warn(
           "WebSocket Message (data: %o) Error: %s",
-          data,
+          message,
           err.message
         );
       }
@@ -19,10 +19,11 @@ export default async function (fastify, opts) {
   }
 
   function sendCurrentOrders(category, socket) {
-    for (const order of fastify.currentOrders(category)) {
-      socket.send(order);
-    }
+  const orders = Array.from(fastify.currentOrders(category));
+  for (const order of orders) {
+    socket.send(order);
   }
+}
 
   fastify.get(
     "/:category",
@@ -36,10 +37,12 @@ export default async function (fastify, opts) {
       }
     }
   );
-  
+
   fastify.post("/:id", async (request) => {
     const { id } = request.params;
     fastify.addOrder(id, request.body.amount);
+    console.log(`id: ${id} inserted`);
     return { ok: true };
   });
-} 
+}
+
