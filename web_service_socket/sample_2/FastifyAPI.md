@@ -1,4 +1,31 @@
 
+# Getting Started with [Fastify-CLI](https://www.npmjs.com/package/fastify-cli)
+
+This project was bootstrapped with Fastify-CLI.
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm run dev`
+
+To start the app in dev mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+### `npm start`
+
+For production mode
+
+### `npm run test`
+
+Run the test cases.
+
+## Learn More
+
+To learn Fastify, check out the [Fastify documentation](https://www.fastify.io/docs/latest/).
+
+---
+
 ## Fastify scafolding framework
 
 ```bash
@@ -77,6 +104,21 @@ npm run dev
 ```
 
 ### Post & Plugin
+
+Plugins define behavior that is common to all the routes in your
+application. Authentication, caching, templates, and all the other cross
+cutting concerns should be handled by plugins placed in this folder.
+
+Files in this folder are typically defined through the
+[`fastify-plugin`](https://github.com/fastify/fastify-plugin) module,
+making them non-encapsulated. They can define decorators and set hooks
+that will then be used in the rest of your application.
+
+Check out:
+
+* [The hitchhiker's guide to plugins](https://www.fastify.io/docs/latest/Guides/Plugins-Guide/)
+* [Fastify decorators](https://www.fastify.io/docs/latest/Reference/Decorators/).
+* [Fastify lifecycle](https://www.fastify.io/docs/latest/Reference/Lifecycle/).
 
 It is highly recommended that production Node.js services are stateless. That is, they don't store their own state, but retrieve it from an upstream service or database. When we are creating mock web services, however, storing state in-memory is fine. We are just trying to carve out a “happy path” for the application or service that we are actually implementing. In order to store state, we are going to need to create the minimum set of database-like abstractions for our POST request to make sense. Namely, we will need to create an ID for each new entry. Since we have two routes and we don't want duplicate logic (even in mocking web services, the Don't Repeat Yourself principle applies) we can create a small data utility library plugin that both routes can use.
 

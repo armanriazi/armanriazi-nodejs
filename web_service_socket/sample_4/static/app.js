@@ -63,6 +63,7 @@ const realtimeOrders = (category) => {
 
 // Realtime orders via Websocket bio-directional
 const realtimeOrders = (category) => {
+  if (socket) socket.close();
   if (socket === null) {
     socket = new WebSocket(`${WS_API}/orders/${category}`);
   } else {

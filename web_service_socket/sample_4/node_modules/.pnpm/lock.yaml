@@ -528,7 +528,7 @@ packages:
       rfdc: 1.3.0
       secure-json-parse: 2.7.0
       semver: 7.5.4
-      toad-cache: 3.4.1
+      toad-cache: 3.5.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -1265,8 +1265,8 @@ packages:
       is-number: 7.0.0
     dev: false
 
-  /toad-cache@3.4.1:
-    resolution: {integrity: sha512-T0m3MxP3wcqW0LaV3dF1mHBU294sgYSm4FOpa5eEJaYO7PqJZBOjZEQI1y4YaKNnih1FXCEYTWDS9osCoTUefg==}
+  /toad-cache@3.5.0:
+    resolution: {integrity: sha512-kgjpl3FSy20vEA3W/4iPuR6YvA2SN1ho4qnwkQV7REn2leYznSr3z+R6/CIeoo4WKI5nJRUxOYfOiZNAklboZQ==}
     engines: {node: '>=12'}
     dev: false
 

@@ -27,6 +27,21 @@ export default async function (fastify, opts) {
 
 ### Plugin
 
+Plugins define behavior that is common to all the routes in your
+application. Authentication, caching, templates, and all the other cross
+cutting concerns should be handled by plugins placed in this folder.
+
+Files in this folder are typically defined through the
+[`fastify-plugin`](https://github.com/fastify/fastify-plugin) module,
+making them non-encapsulated. They can define decorators and set hooks
+that will then be used in the rest of your application.
+
+Check out:
+
+* [The hitchhiker's guide to plugins](https://www.fastify.io/docs/latest/Guides/Plugins-Guide/)
+* [Fastify decorators](https://www.fastify.io/docs/latest/Reference/Decorators/).
+* [Fastify lifecycle](https://www.fastify.io/docs/latest/Reference/Lifecycle/).
+
 An async function produces a promise. A generator function produces an iterable. This is an object with a next function that can be called to make the function progress to the next yield keyword in that function and returns the value of whatever is yielded. An iterable can be looped over with a for of loop. An async generator function is a combination of both async functions and generator functions, and it is useful for asynchronously producing continuous state changes. It returns an async iterable, which is an object with a next function that returns a promise which resolves to the value of whatever is yielded from the async function generator. Async iterables can be looped over with a for await of loop. See [JavaScript Demo: Statement - For Await...Of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of#iterating_over_async_generators) for more insight. 
 
 The upshot is we can use the async generator function here to output a randomly incremented total for a randomly selected order every 1500 milliseconds. We do this by awaiting the timeout function, passing 1500 to it at the end of the infinite while loop. Just above that, we yield a stringified object containing the product ID and the new total. We also keep a running total by modifying the orders object each time; this means **we can provide consistent totals for each product to every WebSocket client.**
@@ -43,6 +58,34 @@ For more information on non-async generators, see the following article, [Genera
 ### Route
 
 We have updated the async handler function so that it uses a for of loop to iterate through each stringified object yielded from fastify.currentOrders based on the requested category. Each of these stringified objects is sent to the client over the WebSocket. Under the for of loop, we have also added a for await of loop to asynchronously iterate over the real time orders, and send each asynchronous yielded stringified object to the client. This results in the client side updating one product item's orders approximately every 1.5 seconds.
+
+# Routes Folder
+
+Routes define routes within your application. Fastify provides an
+easy path to a microservice architecture, in the future you might want
+to independently deploy some of those.
+
+In this folder you should define all the routes that define the endpoints
+of your web application.
+Each service is a [Fastify
+plugin](https://www.fastify.io/docs/latest/Reference/Plugins/), it is
+encapsulated (it can have its own independent plugins) and it is
+typically stored in a file; be careful to group your routes logically,
+e.g. all `/users` routes in a `users.js` file. We have added
+a `root.js` file for you with a '/' root added.
+
+If a single file become too large, create a folder and add a `index.js` file there:
+this file must be a Fastify plugin, and it will be loaded automatically
+by the application. You can now add as many files as you want inside that folder.
+In this way you can create complex routes within a single monolith,
+and eventually extract them.
+
+If you need to share functionality between routes, place that
+functionality into the `plugins` folder, and share it via
+[decorators](https://www.fastify.io/docs/latest/Reference/Decorators/).
+
+If you're a bit confused about using `async/await` to write routes, you would
+better take a look at [Promise resolution](https://www.fastify.io/docs/latest/Reference/Routes/#promise-resolution) for more details.
 
 
 ## ReCap
