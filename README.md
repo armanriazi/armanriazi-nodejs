@@ -1,4 +1,5 @@
-# Web Socket/Service
+# Project Index
+## Web Socket/Service
 
 - [Simple Webservice](web_service_socket/sample_1/SimpleWebservice.md)
 - [FastifyAPI Scaffolder](web_service_socket/sample_2/FastifyAPI.md)
@@ -81,3 +82,74 @@ Other than abstracting the underlying system calls, libuv also implements the re
 - [x] A core JavaScript library that implements the high-level Node.js API.
 
 ![Core Components](/assets/images/nodejs.jpg)
+
+---
+
+# NodeJS extra features
+## Stream
+There are four types of streams:
+- [x] Readable
+- [x] Writable
+- [x] Duplex : Readable + Writable
+- [x] Transform: Manipulate the data while it is being read/written
+
+## REPL
+REPL stands for Read Eval Print Loop and it represents a computer environment like a window console or unix/linux shell where a command is entered, and system responds with an output.
+
+`REPL performs the following desired tasks:`
+
+- [x] Read - Reads user's input, parses the input into JavaScript data-structure and stores in memory.
+- [x] Eval - Takes and evaluates the data structure.
+- [x] Print- Prints the result  
+- [x] Loop - Loops the above command until user presses ctrl-c twice 
+
+## Control Flow
+Control Flow function is a piece of code which runs in between several asynchronous function calls.
+
+`The Control Flow does the following jobs:` 
+
+- [x] Control the order of execution.
+- [x] Collect data
+- [x] Limit concurrency
+- [x] Call the next step in a program.
+
+
+![Fork Spawn](/assets/images/fork_spawn.png)
+
+
+## Buffer class
+Buffer class stores raw data similar to an array of integers but corresponds to a raw memory allocation outside the V8 heap.
+Buffer class is used because pure JavaScript is not compatible with binary data.
+
+## Piping
+
+Piping is a mechanism to connect output of one stream to another stream.
+It is normally used to get data from one stream and to pass output of that stream to another stream.
+
+## File access
+
+- [x] r- Open file for reading. An exception occurs if the file does not exist.
+
+- [x] r+ Open file for reading and writing. An exception occurs if the file does not exist.
+
+- [x] w- Open file for writing. The file is created (if it does not exist) or truncated (if it exists).
+
+- [x] w+ - Open file for reading and writing. The file is created (if it does not exist) or truncated (if it exists).
+
+- [x] a- Open file for appending. The file is created if it does not exist.
+
+- [x] a+ Open file for reading & appending. The file is created if it does not exist.
+
+## Environment
+
+```bash
+export NODE_ENV= production
+```
+
+## Schedule code
+
+Timers module is provided by Node.js which contains various functions for executing the code after a specified period of time. Various functions that are provided by this module:
+
+- [x] setTimeout/clearTimeout - Used to schedule code execution after a designated amount of milliseconds.
+- [x] setInterval/clearInterval - Used to execute a block of code multiple times.
+- [x] setImmediate/clearImmediate - Used to execute code at the end of the current event loop cycle.
