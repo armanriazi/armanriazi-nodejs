@@ -1,0 +1,17 @@
+{
+  "name": "datetime",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "timezone": "node timezone.js  'Europe/Paris'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.30.1",
+    "moment-timezone": "^0.5.44"
+  }
+}
