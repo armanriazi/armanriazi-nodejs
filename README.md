@@ -53,13 +53,11 @@ Here’s what happens in an application using the reactor pattern:
 - [x] The application generates a new I/O operation by submitting a request to the Event Demultiplexer. The application also specifies a handler, which is invoked when the operation completes. Submitting a new request to the Event Demultiplexer is a non-blocking call and it immediately returns control to the application.
 
 - [x] When a set of I/O operations completes, the Event Demultiplexer pushes a set of corresponding events into the Event Queue.
-
 - [x] At this point, the Event Loop iterates over the items of the Event Queue.
 
 > For each event, the associated handler is invoked.
 
 - [x] The handler, which is part of the application code, gives back control to the Event Loop when its execution completes (5a). While the handler executes, it can request new asynchronous operations (5b), causing new items to be added to the Event Demultiplexer (1).
-
 - [x] When all the items in the Event Queue are processed, the Event Loop blocks again on the Event Demultiplexer, which then triggers another cycle when a new event is available.
 
 
@@ -76,9 +74,7 @@ Note: The reactor pattern handles I/O by blocking until new events are available
 Other than abstracting the underlying system calls, libuv also implements the reactor pattern, therefore providing an API for creating event loops, managing the event queue, running asynchronous I/O operations, and queuing other types of tasks.
 
 - [x] A set of bindings responsible for wrapping and exposing libuv and other low-level functionalities to JavaScript.
-
 - [x] V8, the JavaScript engine originally developed by Google for the Chrome browser. This is one of the reasons why Node.js is so fast and efficient. V8 is acclaimed for its revolutionary design, its speed, and its efficient memory management.
-
 - [x] A core JavaScript library that implements the high-level Node.js API.
 
 ![Core Components](/assets/images/nodejs.jpg)
@@ -113,9 +109,7 @@ Control Flow function is a piece of code which runs in between several asynchron
 - [x] Limit concurrency
 - [x] Call the next step in a program.
 
-
 ![Fork Spawn](/assets/images/fork_spawn.png)
-
 
 ## Buffer class
 Buffer class stores raw data similar to an array of integers but corresponds to a raw memory allocation outside the V8 heap.
@@ -129,22 +123,13 @@ It is normally used to get data from one stream and to pass output of that strea
 ## File access
 
 - [x] r- Open file for reading. An exception occurs if the file does not exist.
-
 - [x] r+ Open file for reading and writing. An exception occurs if the file does not exist.
-
 - [x] w- Open file for writing. The file is created (if it does not exist) or truncated (if it exists).
-
 - [x] w+ - Open file for reading and writing. The file is created (if it does not exist) or truncated (if it exists).
 
 - [x] a- Open file for appending. The file is created if it does not exist.
-
 - [x] a+ Open file for reading & appending. The file is created if it does not exist.
 
-## Environment
-
-```bash
-export NODE_ENV= production
-```
 
 ## Schedule code
 
@@ -153,3 +138,9 @@ Timers module is provided by Node.js which contains various functions for execut
 - [x] setTimeout/clearTimeout - Used to schedule code execution after a designated amount of milliseconds.
 - [x] setInterval/clearInterval - Used to execute a block of code multiple times.
 - [x] setImmediate/clearImmediate - Used to execute code at the end of the current event loop cycle.
+
+## Environment
+
+```bash
+export NODE_ENV= production
+```
