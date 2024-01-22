@@ -40,6 +40,15 @@ The demultiplexer is set up with the group of resources to be watched. The call 
 Each event returned by the event demultiplexer is processed. At this point, the resource associated with each event is guaranteed to be ready to read and to not block during the operation. When all the events are processed, the flow will block again on the event demultiplexer until new events are again available to be processed. This is called the event loop.
 
 
+JavaScript is an asynchronous single-threaded language, it can only do one thing at a time because it has one call stack, this call stack is present in the JS engine and all the code of the JS is executed in the call stack. Node.js event loop architecture is single threaded so it can only perform one task at a time. For each application, there is only one thread so all the users accessing to your Node.js application,500 users or 5 million users use the same thread. So if user Adam makes a request to your Node.js app for a synchronous code and then user Mike also makes a request for a synchronous code,user Mike has to wait until Node.js processes user Adam's request. This means if you have a synchronous function in your code that takes 1 second to run, the second user who makes a request has to wait 2 seconds, and the third user,3 seconds, and so on. This is very bad. To avoid this problem we can use asynchronous code for the tasks that will take time to finish in your code. Node.js internally uses a library called! Libuv which handles operating system-related tasks. Like Input/Output tasks, networking etc. Ukuv sets a thread pool of four threads by default to perform OS-related tasks by utilizing the power of all the CPU cores. So if you have a 4-core CPU, each thread from the pool is assigned to every core so one thread for every core. We can change the number of threads in the libuv thread pool. 
+
+## Call stack
+Call stack is a section in memory where function calls are stored and synchronous functions are executed. Whenever we call a sync function, the function gets added onto the call stack where it is executed. All the code in JS is executed in the call stack so we need to put the callback functions of async functions into the call stack and that is what the event loop does for us. 
+
+## Event loop 
+It checks the call stack and the callback Queue, if the call stack is empty and there is/are callback functions in the Callback queue, event loop pushes those callback functions in the callback queue to the call stack where the callback functions will run. 
+
+
 ## Reactor pattern
 We can now introduce the reactor pattern, which is a specialization of the algorithms presented in the previous sections. The main idea behind the reactor pattern is to have a handler associated with each I/O operation. A handler in Node.js is represented by a callback (or cb for short) function.
 Each operating system has its own interface for the event demultiplexer: epoll on Linux, kqueue on macOS, and the I/O completion port (IOCP) API on Windows. 
@@ -47,6 +56,10 @@ Each operating system has its own interface for the event demultiplexer: epoll o
 ![Reactor](/assets/images/reactor.jpg)
 
 ![Nodejs Cycle](/assets/images/nodejs_cycle.png)
+
+![Nodejs Cycle 2](/assets/images/nodejs_cir.png)
+
+![Nodejs Gif](/assets/images/nodejs_gif.gif)
 
 Here’s what happens in an application using the reactor pattern:
 
