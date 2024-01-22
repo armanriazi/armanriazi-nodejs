@@ -1,5 +1,7 @@
 fundamental/node_modules/
 fundamental/datetime/node_modules/
+server/express
+server/tcp_udm
 web_service_socket/sample_1/node_modules/
 web_service_socket/sample_2/node_modules/
 web_service_socket/sample_3/node_modules/

@@ -84,6 +84,7 @@ Other than abstracting the underlying system calls, libuv also implements the re
 # NodeJS extra features
 ## Stream
 There are four types of streams:
+
 - [x] Readable
 - [x] Writable
 - [x] Duplex : Readable + Writable
@@ -126,7 +127,6 @@ It is normally used to get data from one stream and to pass output of that strea
 - [x] r+ Open file for reading and writing. An exception occurs if the file does not exist.
 - [x] w- Open file for writing. The file is created (if it does not exist) or truncated (if it exists).
 - [x] w+ - Open file for reading and writing. The file is created (if it does not exist) or truncated (if it exists).
-
 - [x] a- Open file for appending. The file is created if it does not exist.
 - [x] a+ Open file for reading & appending. The file is created if it does not exist.
 
