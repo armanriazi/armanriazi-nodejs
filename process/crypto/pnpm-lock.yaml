@@ -1,0 +1,23 @@
+lockfileVersion: '6.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+dependencies:
+  execution-time:
+    specifier: ^1.4.1
+    version: 1.4.1
+
+packages:
+
+  /execution-time@1.4.1:
+    resolution: {integrity: sha512-4t9svrTtsXxAEzAs9/tm1R/Voj5AYHqxd72BiLEbGQWJq2PD3tAmW8bXI7Pp0yorjaKshT1+NyKy0ytHlKW4Pg==}
+    dependencies:
+      pretty-hrtime: 1.0.3
+    dev: false
+
+  /pretty-hrtime@1.0.3:
+    resolution: {integrity: sha512-66hKPCr+72mlfiSjlEB1+45IjXSqvVAIy6mocupoww4tBFE9R9IhwwUGoI4G++Tc9Aq+2rxOt0RFU6gPcrte0A==}
+    engines: {node: '>= 0.8'}
+    dev: false

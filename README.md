@@ -125,6 +125,73 @@ Control Flow function is a piece of code which runs in between several asynchron
 
 ![Fork Spawn](/assets/images/fork_spawn.png)
 
+
+## NodeJS Process
+
+### Thread 
+thread is a worker lives in a process, thread can execute JavaScript code , it consumes fewer resources. 
+**Threads do not have their own memory**. Threads can share process's memory and share data with each other. 
+
+### Task
+It is the module(.js file) where the code is run as a thread. 
+
+#### Process
+A program becomes a process when launched into memory, process means **a program is in execution**, it can **contain multiple threads** all executing at the same time. Process consume more resources than a thread.***Process doesn't share data.** 
+
+### Process vs worker
+A process has its own memory and resources. A worker uses the same memory and resources of the process from which it is created. 
+
+### Application
+It is the main thread in a process.
+
+A module: It is a .js file.
+
+Node.js implements the **libuv library that provides four extra threads(can be changed)** to a Node.js process. In addition to those four threads, the V8 engine provides two threads for handling automatic garbage collection. As a result total number of threads in a process is seven, **one main thread, four Node.js threads, aid(GC) two V8 threads.** 
+The I/O operations make use of Node.js hidden threads. Async functions or promises do not provide any mechanism to make CPU-bound tasks non blocking, you need to use worker_threads module to offload a CPU-bound task into separate thread. So, **do not use worker_threads for I/O.** worker_threads use to operations in **parallel**.
+
+`Can Node.js process heavy data that requires high CPU usage?If yes, How is this done?`
+
+Node.js uses one thread to run the code and has a thread pool(libuv) to handle the 10 operations such as network and database calls. This architecture works fine when there are lots of tasks that require a short process. But if there is heavy data processing as a result of high CPU usage such as running a long while loop or calculating the Fibonacci of a big number is a problem in the main thread. Why? Because Node.js only uses a single thread of your CPU no matter how many cores/threads you have. So it is a good practice to move the CPU-intensive task to another thread or process so that the main thread is not blocked. There are multiple ways to achieve this: 
+
+- [x] Splitting up tasks with setImmediate
+- [x] Spawning a child process
+- [x] Using cluster
+- [x] Using worker threads 
+
+### I/O (Input-output) 
+
+refers to reading/ writing files, talking to databases, or network operations. Node.js is designed for I/O operations which for the most part does not block the main thread. 
+The problem: Doing Input-Output operations like responding to an HTTP request or talking to a database or other servers are what Node.js is good at because Node.js is single threaded which makes it possible to handle many requests quickly with low system resource consumption. *If we run heavy CPU-bound operations in the context of a web application, the single thread of node will be blocked so the web server will not be able to respond to any request* because it is busy running a heavy calculation or a huge while loop or image processing, compression algorithms, heavy crypto operations, matrix multiplications, etc.. So CPU-intensive tasks are blocking the main thread. 
+
+### What is child process and cluster used for?
+
+`Demonstrate how "fork" function is used in child_process and cluster`
+
+child_process and cluster modules are used to create new processes. **The child_process has 3 essential functions.** 
+
+- [x] Spawn: It **runs a command in a new process**. The data that gets returned after running a command will be in the form of **streams**. There is no limit in the size of the response because it is **sent back in chunks**.
+- [x] Exec: Exec also **runs a command in a process** but the response is in the form of **buffer**. If the size of the response after running a command is greater than the buffer, your application will crash. **A shell is spawned and command is executed.**
+- [x] Fork: Is a special case of spawn. **Spawns a new Node.js process** like any of the previous methods. The communication **channel is established to the child process** when using fork, so *we can use a function called send on the forked process* to **exchange messages between the parent and the forked processes.** 
+
+
+### What is a process
+
+A process is an instance of the program you run on a system. When you open up a browser, for example, a process is created for that program. When you run node app.js, a Node.js process is created. Each process will have its own memory and resources. You can access the process information by using the process object. This object has details related to the application, OS, and much more. 
+
+### Worker threads
+module enables the use of threads that execute JavaScript in parallel. Worker threads have isolated contexts. They exchange information with the main thread using PostMessage which allows the worker thread to communicate with the main thread. Worker threads live in the same process so they use a lot **less memory than a process cluster setup**. Worker threads could **utilize multiple CPU cores in a single Node.js process**. Use workerData to pass data to the worker thread when creating a worker. 
+
+worker_threads can **share memory unlike child_process or cluster(data is cloned to another process)**. We can also split expensive requests to parts that are run in parallel in separate worker threads and thus complete the request faster. When you transfer data from a worker thread to the main thread, the data gets copied. **To prevent copying of the data, you have to use either ArrayBuffer or SharedArrayBuffer for threads to share the same memory.**
+
+Usecase of workerpool npm package are also welcome.
+
+to run a long-term processes or benchmark of a loop of worker threads, we use follow commands:
+
+```bash
+conda activate base
+autocannon -c 5 http://localhost:5000/heavy
+```
+
 ## Buffer class
 Buffer class stores raw data similar to an array of integers but corresponds to a raw memory allocation outside the V8 heap.
 Buffer class is used because pure JavaScript is not compatible with binary data.

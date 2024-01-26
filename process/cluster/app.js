@@ -7,7 +7,7 @@ const numCPUs = os.cpus().length;
 if (cluster.isPrimary) {
   console.log(`Primary ${process.pid} is running`);
 
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < numCPUs; i++) {
     //spawns child processes/instance
     cluster.fork();
   }
@@ -38,8 +38,8 @@ if (cluster.isPrimary) {
   app.get("/light", (req, res) => {
     res.send("From light");
   });
-  app.listen(6000, () => {
-    console.log("listening to port 6000");
+  app.listen(5000, () => {
+    console.log("listening to port 5000");
   });
 }
 

@@ -1,0 +1,15 @@
+{
+  "name": "crypto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "export UV_THREADPOOL_SIZE=6 && node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "execution-time": "^1.4.1"
+  }
+}
