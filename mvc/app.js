@@ -1,3 +1,6 @@
+
+/// mongod.exe --dbpath ..\mongodb
+//// mongorestore --db=blog --dir=..\mongodb\blog
 const express = require("express");
 const mongoose = require("mongoose");
 const orderRoutes = require("./routes/order.routes");
