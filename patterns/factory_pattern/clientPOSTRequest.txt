@@ -1,0 +1,14 @@
+{
+    "order_details": [
+        {
+            "item": "chicken-menu",
+            "price": "7.99$"
+        }
+    ],
+    "delivery_details": {
+        "delivery_method": "motorscooter",
+        "maxWaitingTime": "20",
+        "address": "Sweet street 29",
+        "tip": "15$"
+    }
+}

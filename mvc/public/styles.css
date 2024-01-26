@@ -1,0 +1,14 @@
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  display: inline;
+  margin: 20px;
+}
+
+.about{
+    font-size:1.6em
+}

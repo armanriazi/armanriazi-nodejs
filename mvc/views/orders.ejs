@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs")%>
+  <body>
+    <%- include("./partials/nav.ejs")%> <% if (savedOrders.length > 0){
+    savedOrders.forEach(order=>{%>
+    <h3 class="order-name"><%= order.orderName %></h3>
+    <p class="total"><%=order.total %>$</p>
+    <p>-------------------------------------</p>
+    <%})}else{%>
+    <h1>There are no orders to display..</h1>
+    <%}%>
+  </body>
+</html>
