@@ -12,3 +12,4 @@ procecss/worker_thread/node_modules/
 procecss/crypto/node_modules/
 patterns/factory_pattern/node_modules/
 mvc/node_modules/
+dbs/mongodb-cc/node_modules
