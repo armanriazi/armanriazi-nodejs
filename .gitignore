@@ -1,15 +1,1 @@
-fundamental/node_modules/
-fundamental/datetime/node_modules/
-server/express/node_modules/
-server/tcp_udm/node_modules/
-web_service_socket/sample_1/node_modules/
-web_service_socket/sample_2/node_modules/
-web_service_socket/sample_3/node_modules/
-web_service_socket/sample_4/node_modules/
-procecss/child_process/node_modules/
-procecss/cluster/node_modules/
-procecss/worker_thread/node_modules/
-procecss/crypto/node_modules/
-patterns/factory_pattern/node_modules/
-mvc/node_modules/
-dbs/mongodb-cc/node_modules
+**/node_modules
