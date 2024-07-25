@@ -151,7 +151,7 @@ The I/O operations make use of Node.js hidden threads. Async functions or promis
 
 `Can Node.js process heavy data that requires high CPU usage?If yes, How is this done?`
 
-Node.js uses one thread to run the code and has a thread pool(libuv) to handle the 10 operations such as network and database calls. This architecture works fine when there are lots of tasks that require a short process. But if there is heavy data processing as a result of high CPU usage such as running a long while loop or calculating the Fibonacci of a big number is a problem in the main thread. Why? Because Node.js only uses a single thread of your CPU no matter how many cores/threads you have. So it is a good practice to move the CPU-intensive task to another thread or process so that the main thread is not blocked. There are multiple ways to achieve this: 
+Node.js uses one thread to run the code and has a **thread pool(libuv)** to handle the 10 operations such as network and database calls. This architecture works fine when there are lots of tasks that require a short process. But if there is heavy data processing as a result of high CPU usage such as running a long while loop or calculating the Fibonacci of a big number is a problem in the main thread. Why? Because Node.js only uses a single thread of your CPU no matter how many cores/threads you have. So it is a good practice to move the CPU-intensive task to another thread or process so that the main thread is not blocked. There are multiple ways to achieve this: 
 
 - [x] Splitting up tasks with setImmediate
 - [x] Spawning a child process
